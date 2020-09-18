@@ -73,7 +73,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 - [x] You will be creating a REST api service to store and read data from a database. You should be able to switch between an H2 database and a PostgreSQL database by using an application.properties setting.
 
-- [ ] Please fork and clone this repository. This repository does have a starter project. The provided initial application has the basics in place. Note that if you start with the initial project, all the following are done for you!!!
+- [x] Please fork and clone this repository. This repository does have a starter project. The provided initial application has the basics in place. Note that if you start with the initial project, all the following are done for you!!!
 
 - Auditing fields
 - Exception Handling
@@ -92,13 +92,13 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 - **You are tasked to do the following**
 
-- [ ] Currently, Books are not addressed in security so those routes cannot be accessed. Setup security so that the following access is available:
+- [x] Currently, Books are not addressed in security so those routes cannot be accessed. Setup security so that the following access is available:
 
-  - [ ] GET /books/books - any user with the role ADMIN or DATA can access
-  - [ ] GET /books/book/{id} - any user with role ADMIN or DATA can access
-  - [ ] POST /books/book - any user with role ADMIN can access
-  - [ ] PUT /books/book/{id} - any user with role ADMIN can access
-  - [ ] DELETE /books/book/{id} - any user with role ADMIN can access
+  - [x] GET /books/books - any user with the role ADMIN or DATA can access
+  - [x] GET /books/book/{id} - any user with role ADMIN or DATA can access
+  - [x] POST /books/book - any user with role ADMIN can access
+  - [x] PUT /books/book/{id} - any user with role ADMIN can access
+  - [x] DELETE /books/book/{id} - any user with role ADMIN can access
 
 - [ ] When a client tries searching for or updating a book that does not exist, a generic exception is sent back to the client. Change this so our custom exception ResourceNotFoundException is returned instead.
 
