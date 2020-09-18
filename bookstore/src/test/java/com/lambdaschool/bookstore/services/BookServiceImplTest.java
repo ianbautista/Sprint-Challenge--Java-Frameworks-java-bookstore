@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -49,11 +50,11 @@ public class BookServiceImplTest
         MockitoAnnotations.initMocks(this);
 
         // getting book id
-        List<Book> myList = bookService.findAll();
-        for (Book b : myList)
-        {
-            System.out.println(b.getBookid() + " " + b.getTitle());
-        }
+//        List<Book> myList = bookService.findAll();
+//        for (Book b : myList)
+//        {
+//            System.out.println(b.getBookid() + " " + b.getTitle());
+//        }
 
 //        26 Flatterland
 //        27 Digital Fortess
@@ -243,7 +244,34 @@ public class BookServiceImplTest
         Book updatedBook = bookService.save(b1);
 
         assertEquals("Updated Title", updatedBook.getTitle());
+    }
 
+    @Test
+    public void  xxx_update() {
+        Author a6 = new Author("Ian", "Stewart");
+        a6.setAuthorid(20);
+        Section s1 = new Section("Fiction");
+        s1.setSectionid(21);
+        Book b1 = new Book("ButterLand", "9780738206752", 2001, s1);
+        b1.getWrotes()
+                .add(new Wrote(a6, new Book()));
+        b1.setCopy(100);
+        Book newB1 = bookService.update(b1,26);
+        assertEquals("ButterLand", newB1.getTitle());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void  xx_updateFailed() {
+        Author a6 = new Author("Ian", "Stewart");
+        a6.setAuthorid(20450);
+        Section s1 = new Section("Fiction");
+        s1.setSectionid(21);
+        Book b1 = new Book("ButterLand", "9780738206752", 2001, s1);
+        b1.getWrotes()
+                .add(new Wrote(a6, new Book()));
+        b1.setCopy(100);
+        Book newB1 = bookService.update(b1,26);
+        assertEquals("ButterLand", newB1.getTitle());
     }
 
     @Transactional
