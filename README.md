@@ -118,7 +118,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
   - [x] addNewBook
   - [x] deleteBookById
 
-- [ ] And now that we have a good system, deploy the system to Heroku using PostgreSQL. Your application should be switchable between H2 and PostgreSQL through setting a variable in application.properties
+- [x] And now that we have a good system, deploy the system to Heroku using PostgreSQL. Your application should be switchable between H2 and PostgreSQL through setting a variable in application.properties
 
 ### Task 3: Stretch Goals
 
