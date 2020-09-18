@@ -102,13 +102,13 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 - [x] When a client tries searching for or updating a book that does not exist, a generic exception is sent back to the client. Change this so our custom exception ResourceNotFoundException is returned instead.
 
-- [ ] Add unit test for the Book Service using the database as test data. The structure is already in place, you just need to write the tests for the following:
+- [x] Add unit test for the Book Service using the database as test data. The structure is already in place, you just need to write the tests for the following:
 
-  - [ ] findAll
-  - [ ] findBookById that succeeds
-  - [ ] findBookById that fails
-  - [ ] delete
-  - [ ] save a new book
+  - [x] findAll
+  - [x] findBookById that succeeds
+  - [x] findBookById that fails
+  - [x] delete
+  - [x] save a new book
 
 - [ ] Add unit tests for the Book Controller NOT relying on the database as test data. The structure is already in place, you need to set up the data and write the tests for the following:
 
