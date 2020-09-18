@@ -110,13 +110,13 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
   - [x] delete
   - [x] save a new book
 
-- [ ] Add unit tests for the Book Controller NOT relying on the database as test data. The structure is already in place, you need to set up the data and write the tests for the following:
+- [x] Add unit tests for the Book Controller NOT relying on the database as test data. The structure is already in place, you need to set up the data and write the tests for the following:
 
-  - [ ] listAllBooks
-  - [ ] getBookById that succeeds
-  - [ ] getBookById that fails
-  - [ ] addNewBook
-  - [ ] deleteBookById
+  - [x] listAllBooks
+  - [x] getBookById that succeeds
+  - [x] getBookById that fails
+  - [x] addNewBook
+  - [x] deleteBookById
 
 - [ ] And now that we have a good system, deploy the system to Heroku using PostgreSQL. Your application should be switchable between H2 and PostgreSQL through setting a variable in application.properties
 

@@ -73,13 +73,13 @@ public class BookServiceImplTest
     }
 
     @Test
-    public void findBookById()
+    public void b_findBookById()
     {
         assertEquals("The Da Vinci Code",bookService.findBookById(28).getTitle());
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void notFindBookById()
+    public void c_notFindBookById()
     {
         assertEquals("The Turtle Book",bookService.findBookById(1000).getTitle());
     }
@@ -92,7 +92,7 @@ public class BookServiceImplTest
     }
 
     @Test
-    public void save()
+    public void d_save()
     {
         // author
         Author a7 = new Author("Christian", "Bautista");
