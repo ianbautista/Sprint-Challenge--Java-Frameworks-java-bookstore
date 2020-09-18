@@ -1,5 +1,6 @@
 package com.lambdaschool.bookstore.config;
 
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,29 +11,22 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-public class DataSourceConfig
-{
-    // defaulting it to h2
-    @Value("${local.run.db:h2}")
+public class DataSourceConfig {
+    @Value("POSTGRESQL")
     private String dbValue;
 
-    @Value("${spring.datasource.url:}")
-    private String dbURL; //stores value here
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
 
     @Bean
-    public DataSource dataSource()
-    {
-        if (dbValue.equalsIgnoreCase("POSTGRESQL"))
-        {
-            // Assume Heroku
+    public DataSource dataSource(){
+        if (dbValue.equalsIgnoreCase("POSTGRESQL")){
             HikariConfig config = new HikariConfig();
             config.setDriverClassName("org.postgresql.Driver");
-            config.setJdbcUrl(dbURL);
+            config.setJdbcUrl(dbUrl);
             return new HikariDataSource(config);
-        } else
-        {
-            // Assume H2
-            String myURLString = "jdbc:h2:mem:testdb";
+        }else{
+            String myUrlString = "jdbc:h2:mem:testdb";
             String myDriverClass = "org.h2.Driver";
             String myDBUser = "sa";
             String myDBPassword = "";
@@ -40,11 +34,9 @@ public class DataSourceConfig
             return DataSourceBuilder.create()
                     .username(myDBUser)
                     .password(myDBPassword)
-                    .url(myURLString)
+                    .url(myUrlString)
                     .driverClassName(myDriverClass)
                     .build();
         }
     }
-
-
 }

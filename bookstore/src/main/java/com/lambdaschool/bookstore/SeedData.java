@@ -28,7 +28,7 @@ import java.util.Set;
  * after the application context has been loaded.
  */
 @Transactional
-//@Component
+@Component
 public class SeedData
         implements CommandLineRunner
 {

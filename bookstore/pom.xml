@@ -42,6 +42,14 @@
             <!--            <scope>runtime</scope>-->
         </dependency>
 
+        <!-- PostgreSQl Dependency -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.1.1.jre6</version>
+        </dependency>
+        <!-- PostgreSQl Dependency  END-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
