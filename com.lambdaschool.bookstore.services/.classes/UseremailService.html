@@ -1,0 +1,105 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UseremailService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UseremailService (com.lambdaschool.bookstore.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UseremailService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.models.Useremail;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * The Service that works with the Useremail Model
+<i>10</i>&nbsp; * &lt;p&gt;
+<i>11</i>&nbsp; * Note: Emails are added through the add user process
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public interface UseremailService
+<i>14</i>&nbsp;{
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * Returns a list of all users and their emails
+<i>17</i>&nbsp;     *
+<i>18</i>&nbsp;     * @return List of users and their emails
+<i>19</i>&nbsp;     */
+<i>20</i>&nbsp;    List&lt;Useremail&gt; findAll();
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * Returns the user email combination associated with the given id
+<i>24</i>&nbsp;     *
+<i>25</i>&nbsp;     * @param id The primary key (long) of the user email combination you seek
+<i>26</i>&nbsp;     * @return The user email combination (Useremail) you seek
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    Useremail findUseremailById(long id);
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * Remove the user email combination referenced by the given id
+<i>32</i>&nbsp;     *
+<i>33</i>&nbsp;     * @param id The primary key (long) of the user email combination you seek
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    void delete(long id);
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * Replaces the email of the user email combination you seek
+<i>39</i>&nbsp;     *
+<i>40</i>&nbsp;     * @param useremailid  The primary key (long) of the user email combination you seek
+<i>41</i>&nbsp;     * @param emailaddress The new email address (String) for this user email combination
+<i>42</i>&nbsp;     * @return The Useremail object that you updated including the new email address
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    Useremail update(
+<i>45</i>&nbsp;            long useremailid,
+<i>46</i>&nbsp;            String emailaddress);
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Add a new User Email combination
+<i>50</i>&nbsp;     *
+<i>51</i>&nbsp;     * @param userid       the userid of the new user email combination
+<i>52</i>&nbsp;     * @param emailaddress the email address of the new user email combination
+<i>53</i>&nbsp;     * @return the new user email combination
+<i>54</i>&nbsp;     */
+<i>55</i>&nbsp;    Useremail save(
+<i>56</i>&nbsp;            long userid,
+<i>57</i>&nbsp;            String emailaddress);
+<i>58</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>

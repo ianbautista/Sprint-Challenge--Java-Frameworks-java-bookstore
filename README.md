@@ -122,9 +122,9 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 ### Task 3: Stretch Goals
 
-- [ ] Unit Testing
-  - [ ] Write tests to achieve 100% line coverage in book service. This can be done either with or without connecting to the database.
-  - [ ] Write tests to achieve 100% line coverage in book controller. This can be done either with or without connecting to the database.
+- [x] Unit Testing
+  - [x] Write tests to achieve 100% line coverage in book service. This can be done either with or without connecting to the database.
+  - [x] Write tests to achieve 100% line coverage in book controller. This can be done either with or without connecting to the database.
 
 ### Required best practices
 

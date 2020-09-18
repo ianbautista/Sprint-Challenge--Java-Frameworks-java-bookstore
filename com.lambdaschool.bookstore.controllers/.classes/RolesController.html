@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RolesController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.controllers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RolesController (com.lambdaschool.bookstore.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RolesController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.6%
+  </span>
+  <span class="absValue">
+    (1/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.controllers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.models.Role;
+<i>4</i>&nbsp;import com.lambdaschool.bookstore.services.RoleService;
+<i>5</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>6</i>&nbsp;import org.springframework.http.HttpHeaders;
+<i>7</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>8</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i>9</i>&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+<i>10</i>&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+<i>11</i>&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+<i>12</i>&nbsp;import org.springframework.web.bind.annotation.PutMapping;
+<i>13</i>&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+<i>14</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>15</i>&nbsp;import org.springframework.web.bind.annotation.RestController;
+<i>16</i>&nbsp;import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;import javax.validation.Valid;
+<i>19</i>&nbsp;import java.net.URI;
+<i>20</i>&nbsp;import java.util.List;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;/**
+<i>23</i>&nbsp; * The entry point for clients to access role data
+<i>24</i>&nbsp; * &lt;p&gt;
+<i>25</i>&nbsp; * Note: we cannot update a role
+<i>26</i>&nbsp; * we cannot update a role
+<i>27</i>&nbsp; * working with the &quot;non-owner&quot; object in a many to many relationship is messy
+<i>28</i>&nbsp; * we will be fixing that!
+<i>29</i>&nbsp; */
+<i>30</i>&nbsp;@RestController
+<i>31</i>&nbsp;@RequestMapping(&quot;/roles&quot;)
+<b class="fc"><i>32</i>&nbsp;public class RolesController</b>
+<i>33</i>&nbsp;{
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * Using the Role service to process Role data
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    @Autowired
+<i>38</i>&nbsp;    RoleService roleService;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     * List of all roles
+<i>42</i>&nbsp;     * &lt;br&gt;Example: &lt;a href=&quot;http://localhost:2019/roles/roles&quot;&gt;http://localhost:2019/roles/roles&lt;/a&gt;
+<i>43</i>&nbsp;     *
+<i>44</i>&nbsp;     * @return JSON List of all the roles and their associated users
+<i>45</i>&nbsp;     * @see RoleService#findAll() RoleService.findAll()
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    @GetMapping(value = &quot;/roles&quot;,
+<i>48</i>&nbsp;            produces = &quot;application/json&quot;)
+<i>49</i>&nbsp;    public ResponseEntity&lt;?&gt; listRoles()
+<i>50</i>&nbsp;    {
+<b class="nc"><i>51</i>&nbsp;        List&lt;Role&gt; allRoles = roleService.findAll();</b>
+<b class="nc"><i>52</i>&nbsp;        return new ResponseEntity&lt;&gt;(allRoles,</b>
+<i>53</i>&nbsp;                                    HttpStatus.OK);
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * The Role referenced by the given primary key
+<i>58</i>&nbsp;     * &lt;br&gt;Example: &lt;a href=&quot;http://localhost:2019/roles/role/3&quot;&gt;http://localhost:2019/roles/role/3&lt;/a&gt;
+<i>59</i>&nbsp;     *
+<i>60</i>&nbsp;     * @param roleId The primary key (long) of the role you seek
+<i>61</i>&nbsp;     * @return JSON object of the role you seek
+<i>62</i>&nbsp;     * @see RoleService#findRoleById(long) RoleService.findRoleById(long)
+<i>63</i>&nbsp;     */
+<i>64</i>&nbsp;    @GetMapping(value = &quot;/role/{roleId}&quot;,
+<i>65</i>&nbsp;            produces = &quot;application/json&quot;)
+<i>66</i>&nbsp;    public ResponseEntity&lt;?&gt; getRoleById(
+<i>67</i>&nbsp;            @PathVariable
+<i>68</i>&nbsp;                    Long roleId)
+<i>69</i>&nbsp;    {
+<b class="nc"><i>70</i>&nbsp;        Role r = roleService.findRoleById(roleId);</b>
+<b class="nc"><i>71</i>&nbsp;        return new ResponseEntity&lt;&gt;(r,</b>
+<i>72</i>&nbsp;                                    HttpStatus.OK);
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * The Role with the given name
+<i>77</i>&nbsp;     * &lt;br&gt;Example: &lt;a href=&quot;http://localhost:2019/roles/role/name/data&quot;&gt;http://localhost:2019/roles/role/name/data&lt;/a&gt;
+<i>78</i>&nbsp;     *
+<i>79</i>&nbsp;     * @param roleName The name of the role you seek
+<i>80</i>&nbsp;     * @return JSON object of the role you seek
+<i>81</i>&nbsp;     * @see RoleService#findByName(String) RoleService.findByName(String)
+<i>82</i>&nbsp;     */
+<i>83</i>&nbsp;    @GetMapping(value = &quot;/role/name/{roleName}&quot;,
+<i>84</i>&nbsp;            produces = &quot;application/json&quot;)
+<i>85</i>&nbsp;    public ResponseEntity&lt;?&gt; getRoleByName(
+<i>86</i>&nbsp;            @PathVariable
+<i>87</i>&nbsp;                    String roleName)
+<i>88</i>&nbsp;    {
+<b class="nc"><i>89</i>&nbsp;        Role r = roleService.findByName(roleName);</b>
+<b class="nc"><i>90</i>&nbsp;        return new ResponseEntity&lt;&gt;(r,</b>
+<i>91</i>&nbsp;                                    HttpStatus.OK);
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    /**
+<i>95</i>&nbsp;     * Given a complete Role object, create a new Role record
+<i>96</i>&nbsp;     * &lt;br&gt;Example: &lt;a href=&quot;http://localhost:2019/roles/role&quot;&gt;http://localhost:2019/roles/role&lt;/a&gt;
+<i>97</i>&nbsp;     *
+<i>98</i>&nbsp;     * @param newRole A complete new Role object
+<i>99</i>&nbsp;     * @return A location header with the URI to the newly created role and a status of CREATED
+<i>100</i>&nbsp;     * @see RoleService#save(Role) RoleService.save(Role)
+<i>101</i>&nbsp;     */
+<i>102</i>&nbsp;    @PostMapping(value = &quot;/role&quot;,
+<i>103</i>&nbsp;            consumes = &quot;application/json&quot;)
+<i>104</i>&nbsp;    public ResponseEntity&lt;?&gt; addNewRole(
+<i>105</i>&nbsp;            @Valid
+<i>106</i>&nbsp;            @RequestBody
+<i>107</i>&nbsp;                    Role newRole)
+<i>108</i>&nbsp;    {
+<i>109</i>&nbsp;        // ids are not recognized by the Post method
+<b class="nc"><i>110</i>&nbsp;        newRole.setRoleid(0);</b>
+<b class="nc"><i>111</i>&nbsp;        newRole = roleService.save(newRole);</b>
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;        // set the location header for the newly created resource
+<b class="nc"><i>114</i>&nbsp;        HttpHeaders responseHeaders = new HttpHeaders();</b>
+<b class="nc"><i>115</i>&nbsp;        URI newRoleURI = ServletUriComponentsBuilder.fromCurrentRequest()</b>
+<b class="nc"><i>116</i>&nbsp;                .path(&quot;/{roleid}&quot;)</b>
+<b class="nc"><i>117</i>&nbsp;                .buildAndExpand(newRole.getRoleid())</b>
+<b class="nc"><i>118</i>&nbsp;                .toUri();</b>
+<b class="nc"><i>119</i>&nbsp;        responseHeaders.setLocation(newRoleURI);</b>
+<i>120</i>&nbsp;
+<b class="nc"><i>121</i>&nbsp;        return new ResponseEntity&lt;&gt;(null,</b>
+<i>122</i>&nbsp;                                    responseHeaders,
+<i>123</i>&nbsp;                                    HttpStatus.CREATED);
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    /**
+<i>127</i>&nbsp;     * The process allows you to update a role name only!
+<i>128</i>&nbsp;     * &lt;br&gt;Example: &lt;a href=&quot;http://localhost:2019/roles/role/3&quot;&gt;http://localhost:2019/roles/role/3&lt;/a&gt;
+<i>129</i>&nbsp;     *
+<i>130</i>&nbsp;     * @param roleid  The primary key (long) of the role you wish to update
+<i>131</i>&nbsp;     * @param newRole The new name (String) for the role
+<i>132</i>&nbsp;     * @return Status of OK
+<i>133</i>&nbsp;     */
+<i>134</i>&nbsp;    @PutMapping(value = &quot;/role/{roleid}&quot;,
+<i>135</i>&nbsp;            consumes = {&quot;application/json&quot;})
+<i>136</i>&nbsp;    public ResponseEntity&lt;?&gt; putUpdateRole(
+<i>137</i>&nbsp;            @PathVariable
+<i>138</i>&nbsp;                    long roleid,
+<i>139</i>&nbsp;            @Valid
+<i>140</i>&nbsp;            @RequestBody
+<i>141</i>&nbsp;                    Role newRole)
+<i>142</i>&nbsp;    {
+<b class="nc"><i>143</i>&nbsp;        newRole = roleService.update(roleid,</b>
+<i>144</i>&nbsp;                                     newRole);
+<b class="nc"><i>145</i>&nbsp;        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</b>
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>
