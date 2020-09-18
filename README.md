@@ -100,7 +100,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
   - [x] PUT /books/book/{id} - any user with role ADMIN can access
   - [x] DELETE /books/book/{id} - any user with role ADMIN can access
 
-- [ ] When a client tries searching for or updating a book that does not exist, a generic exception is sent back to the client. Change this so our custom exception ResourceNotFoundException is returned instead.
+- [x] When a client tries searching for or updating a book that does not exist, a generic exception is sent back to the client. Change this so our custom exception ResourceNotFoundException is returned instead.
 
 - [ ] Add unit test for the Book Service using the database as test data. The structure is already in place, you just need to write the tests for the following:
 
