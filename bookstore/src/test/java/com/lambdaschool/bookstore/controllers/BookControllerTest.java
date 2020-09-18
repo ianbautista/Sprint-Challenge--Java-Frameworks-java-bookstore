@@ -1,5 +1,6 @@
 package com.lambdaschool.bookstore.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.bookstore.BookstoreApplication;
 import com.lambdaschool.bookstore.models.Author;
@@ -180,8 +181,7 @@ public class BookControllerTest
     }
 
     @Test
-    public void b_getBookById() throws
-            Exception
+    public void b_getBookById() throws Exception
     {
         String apiUrl = "/books/book/101";
 
@@ -251,8 +251,35 @@ public class BookControllerTest
     }
 
     @Test
-    public void updateFullBook()
-    {
+    public void updateFullBook() throws Exception {
+        String apiUrl = "/books/book/200";
+        String b10Name = "Testestest";
+        Author a6 = new Author("Ian", "Stewart");
+        a6.setAuthorid(6);
+
+        Section s1 = new Section("Fiction");
+        s1.setSectionid(10);
+
+        Book b10 = new Book(b10Name, "9780738206752", 2001, s1);
+        b10.setBookid(200);
+        b10.getWrotes()
+                .add(new Wrote(a6, new Book()));
+
+
+        Mockito.when(bookService.update(b10, 200))
+                .thenReturn(b10);
+        ObjectMapper mapper = new ObjectMapper();
+        String restaurantString = mapper.writeValueAsString(b10);
+
+        RequestBuilder rb = MockMvcRequestBuilders.put(apiUrl, 10L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(restaurantString);
+
+        mockMvc.perform(rb)
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+
     }
 
     @Test

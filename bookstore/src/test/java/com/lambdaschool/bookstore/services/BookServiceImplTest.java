@@ -16,9 +16,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -40,8 +44,7 @@ public class BookServiceImplTest
     private SectionService sectionService;
 
     @Before
-    public void setUp() throws
-            Exception
+    public void setUp()
     {
         MockitoAnnotations.initMocks(this);
 
@@ -61,8 +64,7 @@ public class BookServiceImplTest
     }
 
     @After
-    public void tearDown() throws
-            Exception
+    public void tearDown()
     {
     }
 
@@ -85,10 +87,18 @@ public class BookServiceImplTest
     }
 
     @Test
-    public void z_delete()
+    public void y_delete()
     {
         bookService.delete(30);
-        assertEquals(4, bookService.findAll().size());
+        assertEquals(5, bookService.findAll().size());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void x_notFoundDelete()
+    {
+        bookService.delete(10000);
+        assertEquals(5, bookService.findAll()
+                .size());
     }
 
     @Test
@@ -112,13 +122,135 @@ public class BookServiceImplTest
 
     }
 
-    @Test
-    public void update()
+    @Test(expected = ResourceNotFoundException.class)
+    public void e_saveNoAuthorIdFound()
     {
+        Book b = new Book();
+        b.setCopy(new Random().nextInt(100));
+        b.setIsbn(UUID.randomUUID().toString());
+        b.setTitle("TEST");
+        var sections = sectionService.findAll();
+        var authors = authorService.findAll();
+        var aToSave = authors.get(new Random().nextInt(authors.size()));
+        aToSave.setAuthorid(1000);
+        b.setSection(sections.get(new Random().nextInt(sections.size())));
+        b.getWrotes().add(new Wrote(aToSave, b));
+        var savedBook = bookService.save(b);
+        assertTrue(savedBook.getBookid() > 0);
     }
 
-    @Test
-    public void deleteAll()
+    @Test(expected = ResourceNotFoundException.class)
+    public void f_saveNoIdFound()
     {
+        Book b = new Book();
+        b.setCopy(new Random().nextInt(100));
+        b.setIsbn(UUID.randomUUID().toString());
+        b.setTitle("TEST");
+        b.setBookid(1000);
+        var sections = sectionService.findAll();
+        var authors = authorService.findAll();
+        b.setSection(sections.get(new Random().nextInt(sections.size())));
+        b.getWrotes().add(new Wrote(authors.get(new Random().nextInt(authors.size())), b));
+        var savedBook = bookService.save(b);
+        assertTrue(savedBook.getBookid() > 0);
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void g_saveputfailed()
+    {
+        Author a7 = new Author("Christian", "Bautista");
+        a7.setAuthorid(20);
+        Section s6 = new Section("Turtle");
+        s6.setSectionid(201);
+
+        Book b5 = new Book("The Turtle Book", "021099103910", 2000, s6);
+        b5.getWrotes()
+                .add(new Wrote(a7, new Book()));
+        Book saveB5 = bookService.save(b5);
+        assertEquals("The Turtle Book", saveB5.getTitle());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void r_saveputfailed()
+    {
+        Author a7 = new Author("Christian", "Bautista");
+        a7.setAuthorid(20);
+        Section s6 = new Section("Fitness");
+        s6.setSectionid(21);
+
+        Book b5 = new Book("The Turtle Book", "021099103910", 2000, s6);
+        b5.getWrotes()
+                .add(new Wrote(a7, new Book()));
+        b5.setBookid(500);
+        Book saveB5 = bookService.save(b5);
+        assertEquals("The Turtle Book", saveB5.getTitle());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void s_savePutFailedAuthor()
+    {
+        Author a7 = new Author("Christian", "Bautista");
+        Section s6 = new Section("Turtle");
+        s6.setSectionid(21);
+
+        Book b5 = new Book("The Turtle Book", "021099103910", 2000, s6);
+        b5.getWrotes()
+                .add(new Wrote(a7, new Book()));
+        b5.setBookid(500);
+        b5.setCopy(300);
+        Book saveB5 = bookService.save(b5);
+        assertEquals("The Turtle Book", saveB5.getTitle());
+    }
+
+    @Transactional
+    @Test
+    public void w_update()
+    {
+
+        // author
+        Author a7 = new Author("Christian", "Bautista");
+        a7.setAuthorid(20);
+
+        // section
+        Section s6 = new Section("Turtle");
+        s6.setSectionid(21);
+
+        // new book
+        Book b1 = new Book("Updated Title", "9780738206752", 2020, s6);
+        b1.getWrotes().add(new Wrote(a7, new Book()));
+        Book updatedBook = bookService.save(b1);
+
+        assertEquals("Updated Title", updatedBook.getTitle());
+    }
+
+
+    @Transactional
+    @Test(expected = ResourceNotFoundException.class)
+    public void x_updateFailed()
+    {
+
+        // author
+        Author a7 = new Author("Christian", "Bautista");
+        a7.setAuthorid(1000);
+
+        // section
+        Section s6 = new Section("Turtle");
+        s6.setSectionid(10000);
+
+        // new book
+        Book b1 = new Book("Updated Title", "9780738206752", 2020, s6);
+        b1.getWrotes().add(new Wrote(a7, new Book()));
+        Book updatedBook = bookService.save(b1);
+
+        assertEquals("Updated Title", updatedBook.getTitle());
+
+    }
+
+    @Transactional
+    @Test
+    public void z_deleteAll()
+    {
+        bookService.deleteAll();
+        assertEquals(0,bookService.findAll().size());
     }
 }
