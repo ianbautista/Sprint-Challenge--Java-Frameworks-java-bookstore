@@ -1,0 +1,111 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RoleService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RoleService (com.lambdaschool.bookstore.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RoleService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.models.Role;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * The service that works with the Role Model.
+<i>9</i>&nbsp; * &lt;p&gt;
+<i>10</i>&nbsp; * Note: no method update Role name
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface RoleService
+<i>13</i>&nbsp;{
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * Returns a list of all Role objects
+<i>16</i>&nbsp;     *
+<i>17</i>&nbsp;     * @return list of all Role object
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    List&lt;Role&gt; findAll();
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Return the first Role matching the given primary key
+<i>23</i>&nbsp;     *
+<i>24</i>&nbsp;     * @param id The primary key (long) of the Role you seek
+<i>25</i>&nbsp;     * @return The Role object you seek
+<i>26</i>&nbsp;     */
+<i>27</i>&nbsp;    Role findRoleById(long id);
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    /**
+<i>30</i>&nbsp;     * Given a complete Role object, saved that Role object in the database.
+<i>31</i>&nbsp;     * If a primary key is provided, the record is completely replaced
+<i>32</i>&nbsp;     * If no primary key is provided, one is automatically generated and the record is added to the database.
+<i>33</i>&nbsp;     * &lt;p&gt;
+<i>34</i>&nbsp;     * Note that Users are not added to Roles through this process
+<i>35</i>&nbsp;     *
+<i>36</i>&nbsp;     * @param role the role object to be saved
+<i>37</i>&nbsp;     * @return the saved role object including any automatically generated fields
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    Role save(Role role);
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * Find the first Role object matching the given name
+<i>43</i>&nbsp;     *
+<i>44</i>&nbsp;     * @param name The name (String) of the role you seek
+<i>45</i>&nbsp;     * @return The Role object matching the given name
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    Role findByName(String name);
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    /**
+<i>50</i>&nbsp;     * Deletes all record and their associated records from the database
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    public void deleteAll();
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    /**
+<i>55</i>&nbsp;     * Updates the name of the given role
+<i>56</i>&nbsp;     *
+<i>57</i>&nbsp;     * @param id   The primary key (long) of the role you wish to update
+<i>58</i>&nbsp;     * @param role The role object containing the new name - only roles name can be updated through this process
+<i>59</i>&nbsp;     * @return The complete role with the new name
+<i>60</i>&nbsp;     */
+<i>61</i>&nbsp;    Role update(
+<i>62</i>&nbsp;            long id,
+<i>63</i>&nbsp;            Role role);
+<i>64</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>

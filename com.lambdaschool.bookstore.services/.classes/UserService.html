@@ -1,0 +1,129 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.lambdaschool.bookstore.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UserService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.models.User;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * The Service that works with User Model.
+<i>9</i>&nbsp; * &lt;p&gt;
+<i>10</i>&nbsp; * Note: Emails are added through the add user process
+<i>11</i>&nbsp; * Roles are added through the add user process
+<i>12</i>&nbsp; * No way to delete an assigned role
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public interface UserService
+<i>15</i>&nbsp;{
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * Returns a list of all the Users
+<i>18</i>&nbsp;     *
+<i>19</i>&nbsp;     * @return List of Users. If no users, empty list.
+<i>20</i>&nbsp;     */
+<i>21</i>&nbsp;    List&lt;User&gt; findAll();
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    /**
+<i>24</i>&nbsp;     * A list of all users whose username contains the given substring
+<i>25</i>&nbsp;     *
+<i>26</i>&nbsp;     * @param username The substring (String) of the username of the Users you seek
+<i>27</i>&nbsp;     * @return List of users whose username contains the given substring
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    List&lt;User&gt; findByNameContaining(String username);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * Returns the user with the given primary key.
+<i>33</i>&nbsp;     *
+<i>34</i>&nbsp;     * @param id The primary key (long) of the user you seek.
+<i>35</i>&nbsp;     * @return The given User or throws an exception if not found.
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    User findUserById(long id);
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    /**
+<i>40</i>&nbsp;     * Returns the user with the given name
+<i>41</i>&nbsp;     *
+<i>42</i>&nbsp;     * @param name The full name (String) of the User you seek.
+<i>43</i>&nbsp;     * @return The User with the given name or throws an exception if not found.
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    User findByName(String name);
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * Deletes the user record and its useremail items from the database based off of the provided primary key
+<i>49</i>&nbsp;     *
+<i>50</i>&nbsp;     * @param id id The primary key (long) of the user you seek.
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    void delete(long id);
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    /**
+<i>55</i>&nbsp;     * Given a complete user object, saves that user object in the database.
+<i>56</i>&nbsp;     * If a primary key is provided, the record is completely replaced
+<i>57</i>&nbsp;     * If no primary key is provided, one is automatically generated and the record is added to the database.
+<i>58</i>&nbsp;     *
+<i>59</i>&nbsp;     * @param user the user object to be saved
+<i>60</i>&nbsp;     * @return the saved user object including any automatically generated fields
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    User save(User user);
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * Updates the provided fields in the user record referenced by the primary key.
+<i>66</i>&nbsp;     * &lt;p&gt;
+<i>67</i>&nbsp;     * Regarding Role and Useremail items, this process only allows adding those. Deleting and editing those lists
+<i>68</i>&nbsp;     * is done through a separate endpoint.
+<i>69</i>&nbsp;     *
+<i>70</i>&nbsp;     * @param user just the user fields to be updated.
+<i>71</i>&nbsp;     * @param id   The primary key (long) of the user to update
+<i>72</i>&nbsp;     * @return the complete user object that got updated
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    User update(
+<i>75</i>&nbsp;            User user,
+<i>76</i>&nbsp;            long id);
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    /**
+<i>79</i>&nbsp;     * Deletes all record and their associated records from the database
+<i>80</i>&nbsp;     */
+<i>81</i>&nbsp;    public void deleteAll();
+<i>82</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>

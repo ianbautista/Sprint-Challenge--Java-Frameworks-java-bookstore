@@ -59,6 +59,7 @@ public class ResourceServerConfig
                 .authenticated()
                 .antMatchers("/roles/**")
                 .hasAnyRole("ADMIN", "DATA")
+                .antMatchers("/books/**").authenticated()
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());

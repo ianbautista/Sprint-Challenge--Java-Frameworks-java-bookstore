@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UseremailServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UseremailServiceImpl (com.lambdaschool.bookstore.services)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UseremailServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.5%
+  </span>
+  <span class="absValue">
+    (1/ 22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UseremailServiceImpl$$EnhancerBySpringCGLIB$$45a6d098</td>
+  </tr>
+  <tr>
+    <td class="name">UseremailServiceImpl$$EnhancerBySpringCGLIB$$4c153a84</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.5%
+  </span>
+  <span class="absValue">
+    (1/ 22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
+<i>4</i>&nbsp;import com.lambdaschool.bookstore.models.User;
+<i>5</i>&nbsp;import com.lambdaschool.bookstore.models.Useremail;
+<i>6</i>&nbsp;import com.lambdaschool.bookstore.repository.UseremailRepository;
+<i>7</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>8</i>&nbsp;import org.springframework.stereotype.Service;
+<i>9</i>&nbsp;import org.springframework.transaction.annotation.Transactional;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.util.ArrayList;
+<i>12</i>&nbsp;import java.util.List;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; * Implements the UseremailService Interface
+<i>16</i>&nbsp; */
+<i>17</i>&nbsp;@Transactional
+<i>18</i>&nbsp;@Service(value = &quot;useremailService&quot;)
+<b class="fc"><i>19</i>&nbsp;public class UseremailServiceImpl</b>
+<i>20</i>&nbsp;        implements UseremailService
+<i>21</i>&nbsp;{
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * Connects this service to the Useremail model
+<i>24</i>&nbsp;     */
+<i>25</i>&nbsp;    @Autowired
+<i>26</i>&nbsp;    private UseremailRepository useremailrepos;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    /**
+<i>29</i>&nbsp;     * Connects this servive to the User Service
+<i>30</i>&nbsp;     */
+<i>31</i>&nbsp;    @Autowired
+<i>32</i>&nbsp;    private UserService userService;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    @Override
+<i>35</i>&nbsp;    public List&lt;Useremail&gt; findAll()
+<i>36</i>&nbsp;    {
+<b class="nc"><i>37</i>&nbsp;        List&lt;Useremail&gt; list = new ArrayList&lt;&gt;();</b>
+<i>38</i>&nbsp;        /*
+<i>39</i>&nbsp;         * findAll returns an iterator set.
+<i>40</i>&nbsp;         * iterate over the iterator set and add each element to an array list.
+<i>41</i>&nbsp;         */
+<b class="nc"><i>42</i>&nbsp;        useremailrepos.findAll()</b>
+<b class="nc"><i>43</i>&nbsp;                .iterator()</b>
+<b class="nc"><i>44</i>&nbsp;                .forEachRemaining(list::add);</b>
+<b class="nc"><i>45</i>&nbsp;        return list;</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    @Override
+<i>49</i>&nbsp;    public Useremail findUseremailById(long id)
+<i>50</i>&nbsp;    {
+<b class="nc"><i>51</i>&nbsp;        return useremailrepos.findById(id)</b>
+<b class="nc"><i>52</i>&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Useremail with id &quot; + id + &quot; Not Found!&quot;));</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    @Transactional
+<i>56</i>&nbsp;    @Override
+<i>57</i>&nbsp;    public void delete(long id)
+<i>58</i>&nbsp;    {
+<b class="nc"><i>59</i>&nbsp;        if (useremailrepos.findById(id)</b>
+<b class="nc"><i>60</i>&nbsp;                .isPresent())</b>
+<i>61</i>&nbsp;        {
+<b class="nc"><i>62</i>&nbsp;            useremailrepos.deleteById(id);</b>
+<i>63</i>&nbsp;        } else
+<i>64</i>&nbsp;        {
+<b class="nc"><i>65</i>&nbsp;            throw new ResourceNotFoundException(&quot;Useremail with id &quot; + id + &quot; Not Found!&quot;);</b>
+<i>66</i>&nbsp;        }
+<b class="nc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Transactional
+<i>70</i>&nbsp;    @Override
+<i>71</i>&nbsp;    public Useremail update(
+<i>72</i>&nbsp;            long useremailid,
+<i>73</i>&nbsp;            String emailaddress)
+<i>74</i>&nbsp;    {
+<b class="nc"><i>75</i>&nbsp;        if (useremailrepos.findById(useremailid)</b>
+<b class="nc"><i>76</i>&nbsp;                .isPresent())</b>
+<i>77</i>&nbsp;        {
+<b class="nc"><i>78</i>&nbsp;            Useremail useremail = findUseremailById(useremailid);</b>
+<b class="nc"><i>79</i>&nbsp;            useremail.setUseremail(emailaddress.toLowerCase());</b>
+<b class="nc"><i>80</i>&nbsp;            return useremailrepos.save(useremail);</b>
+<i>81</i>&nbsp;        } else
+<i>82</i>&nbsp;        {
+<b class="nc"><i>83</i>&nbsp;            throw new ResourceNotFoundException(&quot;Useremail with id &quot; + useremailid + &quot; Not Found!&quot;);</b>
+<i>84</i>&nbsp;        }
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Transactional
+<i>88</i>&nbsp;    @Override
+<i>89</i>&nbsp;    public Useremail save(
+<i>90</i>&nbsp;            long userid,
+<i>91</i>&nbsp;            String emailaddress)
+<i>92</i>&nbsp;    {
+<b class="nc"><i>93</i>&nbsp;        User currentUser = userService.findUserById(userid);</b>
+<i>94</i>&nbsp;
+<b class="nc"><i>95</i>&nbsp;        Useremail newUserEmail = new Useremail(currentUser,</b>
+<i>96</i>&nbsp;                                               emailaddress);
+<b class="nc"><i>97</i>&nbsp;        return useremailrepos.save(newUserEmail);</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BookServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BookServiceImpl (com.lambdaschool.bookstore.services)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BookServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (59/ 59)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BookServiceImpl$$EnhancerBySpringCGLIB$$94f68638</td>
+  </tr>
+  <tr>
+    <td class="name">BookServiceImpl$$EnhancerBySpringCGLIB$$94f68638$$FastClassBySpringCGLIB$$87fdf66f</td>
+  </tr>
+  <tr>
+    <td class="name">BookServiceImpl$$EnhancerBySpringCGLIB$$9b64f024</td>
+  </tr>
+  <tr>
+    <td class="name">BookServiceImpl$$EnhancerBySpringCGLIB$$9b64f024$$FastClassBySpringCGLIB$$b76ca1b4</td>
+  </tr>
+  <tr>
+    <td class="name">BookServiceImpl$$FastClassBySpringCGLIB$$6bed4e18</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (59/ 59)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
+<i>4</i>&nbsp;import com.lambdaschool.bookstore.models.Author;
+<i>5</i>&nbsp;import com.lambdaschool.bookstore.models.Book;
+<i>6</i>&nbsp;import com.lambdaschool.bookstore.models.Wrote;
+<i>7</i>&nbsp;import com.lambdaschool.bookstore.repository.AuthorRepository;
+<i>8</i>&nbsp;import com.lambdaschool.bookstore.repository.BookRepository;
+<i>9</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>10</i>&nbsp;import org.springframework.stereotype.Service;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import javax.transaction.Transactional;
+<i>13</i>&nbsp;import java.util.ArrayList;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;@Transactional
+<i>17</i>&nbsp;@Service(&quot;bookService&quot;)
+<b class="fc"><i>18</i>&nbsp;public class BookServiceImpl</b>
+<i>19</i>&nbsp;        implements BookService
+<i>20</i>&nbsp;{
+<i>21</i>&nbsp;    @Autowired
+<i>22</i>&nbsp;    UserAuditing userAuditing;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @Autowired
+<i>25</i>&nbsp;    BookRepository bookrepos;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    @Autowired
+<i>28</i>&nbsp;    SectionService sectionService;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Autowired
+<i>31</i>&nbsp;    AuthorRepository authorrepos;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public List&lt;Book&gt; findAll()
+<i>35</i>&nbsp;    {
+<b class="fc"><i>36</i>&nbsp;        List&lt;Book&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>37</i>&nbsp;        bookrepos.findAll()</b>
+<b class="fc"><i>38</i>&nbsp;                .iterator()</b>
+<b class="fc"><i>39</i>&nbsp;                .forEachRemaining(list::add);</b>
+<b class="fc"><i>40</i>&nbsp;        return list;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    @Override
+<i>44</i>&nbsp;    public Book findBookById(long id)
+<i>45</i>&nbsp;    {
+<b class="fc"><i>46</i>&nbsp;        return bookrepos.findById(id)</b>
+<b class="fc"><i>47</i>&nbsp;                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Book with id &quot; + id + &quot; Not Found!&quot;));</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    @Transactional
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public void delete(long id)
+<i>53</i>&nbsp;    {
+<b class="fc"><i>54</i>&nbsp;        if (bookrepos.findById(id)</b>
+<b class="fc"><i>55</i>&nbsp;                .isPresent())</b>
+<i>56</i>&nbsp;        {
+<b class="fc"><i>57</i>&nbsp;            bookrepos.deleteById(id);</b>
+<i>58</i>&nbsp;        } else
+<i>59</i>&nbsp;        {
+<b class="fc"><i>60</i>&nbsp;            throw new ResourceNotFoundException(&quot;Book with id &quot; + id + &quot; Not Found!&quot;);</b>
+<i>61</i>&nbsp;        }
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Transactional
+<i>65</i>&nbsp;    @Override
+<i>66</i>&nbsp;    public Book save(Book book)
+<i>67</i>&nbsp;    {
+<b class="fc"><i>68</i>&nbsp;        Book newBook = new Book();</b>
+<i>69</i>&nbsp;
+<b class="fc"><i>70</i>&nbsp;        if (book.getBookid() != 0)</b>
+<i>71</i>&nbsp;        {
+<b class="fc"><i>72</i>&nbsp;            bookrepos.findById(book.getBookid())</b>
+<b class="fc"><i>73</i>&nbsp;                    .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Book id &quot; + book.getBookid() + &quot; not found!&quot;));</b>
+<i>74</i>&nbsp;        }
+<i>75</i>&nbsp;
+<b class="fc"><i>76</i>&nbsp;        newBook.setTitle(book.getTitle());</b>
+<b class="fc"><i>77</i>&nbsp;        newBook.setIsbn(book.getIsbn());</b>
+<b class="fc"><i>78</i>&nbsp;        newBook.setCopy(book.getCopy());</b>
+<b class="fc"><i>79</i>&nbsp;        if (book.getSection() != null)</b>
+<i>80</i>&nbsp;        {
+<b class="fc"><i>81</i>&nbsp;            newBook.setSection(sectionService.findSectionById(book.getSection()</b>
+<b class="fc"><i>82</i>&nbsp;                                                                      .getSectionid()));</b>
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;
+<b class="fc"><i>85</i>&nbsp;        newBook.getWrotes()</b>
+<b class="fc"><i>86</i>&nbsp;                .clear();</b>
+<b class="fc"><i>87</i>&nbsp;        for (Wrote w : book.getWrotes())</b>
+<i>88</i>&nbsp;        {
+<b class="fc"><i>89</i>&nbsp;            Author addAuthor = authorrepos.findById(w.getAuthor()</b>
+<b class="fc"><i>90</i>&nbsp;                                                            .getAuthorid())</b>
+<b class="fc"><i>91</i>&nbsp;                    .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Author Id &quot; + w.getAuthor()</b>
+<b class="fc"><i>92</i>&nbsp;                            .getAuthorid() + &quot; Not Found!&quot;));</b>
+<b class="fc"><i>93</i>&nbsp;            newBook.getWrotes()</b>
+<b class="fc"><i>94</i>&nbsp;                    .add(new Wrote(addAuthor, newBook));</b>
+<b class="fc"><i>95</i>&nbsp;        }</b>
+<b class="fc"><i>96</i>&nbsp;        return bookrepos.save(newBook);</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @Transactional
+<i>100</i>&nbsp;    @Override
+<i>101</i>&nbsp;    public Book update(Book book,
+<i>102</i>&nbsp;                       long id)
+<i>103</i>&nbsp;    {
+<b class="fc"><i>104</i>&nbsp;        Book currentBook = findBookById(id);</b>
+<i>105</i>&nbsp;
+<b class="fc"><i>106</i>&nbsp;        if (book.getTitle() != null)</b>
+<i>107</i>&nbsp;        {
+<b class="fc"><i>108</i>&nbsp;            currentBook.setTitle(book.getTitle());</b>
+<i>109</i>&nbsp;        }
+<i>110</i>&nbsp;
+<b class="fc"><i>111</i>&nbsp;        if (book.getIsbn() != null)</b>
+<i>112</i>&nbsp;        {
+<b class="fc"><i>113</i>&nbsp;            currentBook.setIsbn(book.getIsbn());</b>
+<i>114</i>&nbsp;        }
+<i>115</i>&nbsp;
+<b class="fc"><i>116</i>&nbsp;        if (book.hasvalueforcopy)</b>
+<i>117</i>&nbsp;        {
+<b class="fc"><i>118</i>&nbsp;            currentBook.setCopy(book.getCopy());</b>
+<i>119</i>&nbsp;        }
+<i>120</i>&nbsp;
+<b class="fc"><i>121</i>&nbsp;        if (book.getSection() != null)</b>
+<i>122</i>&nbsp;        {
+<b class="fc"><i>123</i>&nbsp;            currentBook.setSection(sectionService.findSectionById(book.getSection()</b>
+<b class="fc"><i>124</i>&nbsp;                                                                          .getSectionid()));</b>
+<i>125</i>&nbsp;        }
+<i>126</i>&nbsp;
+<b class="fc"><i>127</i>&nbsp;        if (book.getWrotes()</b>
+<b class="fc"><i>128</i>&nbsp;                .size() &gt; 0)</b>
+<i>129</i>&nbsp;        {
+<b class="fc"><i>130</i>&nbsp;            currentBook.getWrotes()</b>
+<b class="fc"><i>131</i>&nbsp;                    .clear();</b>
+<b class="fc"><i>132</i>&nbsp;            for (Wrote w : book.getWrotes())</b>
+<i>133</i>&nbsp;            {
+<b class="fc"><i>134</i>&nbsp;                Author addAuthor = authorrepos.findById(w.getAuthor()</b>
+<b class="fc"><i>135</i>&nbsp;                                                                .getAuthorid())</b>
+<b class="fc"><i>136</i>&nbsp;                        .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Author Id &quot; + w.getAuthor()</b>
+<b class="fc"><i>137</i>&nbsp;                                .getAuthorid() + &quot; Not Found!&quot;));</b>
+<b class="fc"><i>138</i>&nbsp;                currentBook.getWrotes()</b>
+<b class="fc"><i>139</i>&nbsp;                        .add(new Wrote(addAuthor, currentBook));</b>
+<b class="fc"><i>140</i>&nbsp;            }</b>
+<i>141</i>&nbsp;        }
+<i>142</i>&nbsp;
+<b class="fc"><i>143</i>&nbsp;        return bookrepos.save(currentBook);</b>
+<i>144</i>&nbsp;    }
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    @Transactional
+<i>147</i>&nbsp;    @Override
+<i>148</i>&nbsp;    public void deleteAll()
+<i>149</i>&nbsp;    {
+<b class="fc"><i>150</i>&nbsp;        bookrepos.deleteAll();</b>
+<b class="fc"><i>151</i>&nbsp;    }</b>
+<i>152</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>

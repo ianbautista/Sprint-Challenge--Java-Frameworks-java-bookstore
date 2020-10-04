@@ -1,0 +1,68 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HelperFunctions</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.lambdaschool.bookstore.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HelperFunctions (com.lambdaschool.bookstore.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">HelperFunctions</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.lambdaschool.bookstore.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.lambdaschool.bookstore.models.ValidationError;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Class contains helper functions - functions that are needed throughout the application. The class can be autowired
+<i>9</i>&nbsp; * into any class.
+<i>10</i>&nbsp; */
+<i>11</i>&nbsp;public interface HelperFunctions
+<i>12</i>&nbsp;{
+<i>13</i>&nbsp;    /**
+<i>14</i>&nbsp;     * Searches to see if the exception has any constraint violations to report
+<i>15</i>&nbsp;     *
+<i>16</i>&nbsp;     * @param cause the exception to search
+<i>17</i>&nbsp;     * @return constraint violations formatted for sending to the client
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    List&lt;ValidationError&gt; getConstraintViolation(Throwable cause);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-18 12:41</div>
+</div>
+</body>
+</html>
